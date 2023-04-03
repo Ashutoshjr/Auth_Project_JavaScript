@@ -2,7 +2,7 @@
 var userName = '';
 var userId = '';
 
-//window.onload = onPageLoad;
+window.onload = onPageLoad;
 
 
 
