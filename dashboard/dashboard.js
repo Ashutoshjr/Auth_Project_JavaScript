@@ -2,9 +2,11 @@
 var userName = '';
 var userId = '';
 
-window.onload = onPageLoad;
+//window.onload = onPageLoad;
 
-async function onPageLoad() {
+
+
+ function onPageLoad() {
 
   var token = localStorage.getItem('token');
 
@@ -14,16 +16,16 @@ async function onPageLoad() {
 
     document.getElementById("userDetailForm").style.display = "block";
 
-    await loadUserData();
+     loadUserData();
   } else {
 
-    await OnLogout();
+    OnLogout();
   }
 
 }
 
 
-async function loadUserData() {
+ async function loadUserData() {
 
 
   var validToken = localStorage.getItem('token');
@@ -64,7 +66,8 @@ async function deleteUser() {
 
   if (confirm("Are you sure !")) {
     var response = await deleteUserDetail(userId);
-    if (response != undefined && response.token != "")
+
+    if (response != undefined && response.statusCode == 200)
     {
        OnLogout();
     }
@@ -74,7 +77,7 @@ async function deleteUser() {
 
 
 
- function updateUser() {
+async function updateUser() {
 
   var updatedUserData = {
     id: userId,
@@ -84,11 +87,10 @@ async function deleteUser() {
     email: document.getElementById("email").value
   }
 
-  var response =  updateUserDetail(updatedUserData);
+  var response = await  updateUserDetail(updatedUserData);
 
-  if (response != undefined && response.status == 200) 
+  if (response != undefined && response.statusCode == 200) 
   {
-
     const toastLiveExample = document.getElementById('liveToast')
     document.getElementById('success-message').innerText = `${response.message}`;
 

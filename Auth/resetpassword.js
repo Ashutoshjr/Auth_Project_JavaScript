@@ -13,7 +13,7 @@ async function resetPassword()
 
   var response = await sendResetPassword(resetPasswordDetails);
 
-  if (response != undefined && response.token != "")
+  if (response != undefined && response.statusCode == 200)
   {
 
     window.location.pathname = "/Auth/login.html";

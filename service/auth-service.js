@@ -65,11 +65,11 @@ async function userSignUp(userDetails) {
 }
 
 
-async function getUserByUserName(username) {
+ async function getUserByUserName(username) {
 
     var userResponse = {};
 
-    await fetch(`${baseUri}get-user/${username}`, {
+     await fetch(`${baseUri}get-user/${username}`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ async function updateUserDetail(updateData) {
 
     var userResponse = {};
 
-     await fetch(`${baseUri}update`, {
+    await fetch(`${baseUri}update`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
