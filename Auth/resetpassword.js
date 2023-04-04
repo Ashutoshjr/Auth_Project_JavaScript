@@ -22,7 +22,7 @@ async function resetPassword()
   else
   {
     const toastLiveExample = document.getElementById('liveToast')
-    document.getElementById('error-message').innerText = `${response.message} Server unavailable`;
+    document.getElementById('error-message').innerText = `${response.message}`;
 
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
     toastBootstrap.show()
