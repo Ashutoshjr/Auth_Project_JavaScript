@@ -12,23 +12,12 @@ async function signUp() {
     }
 
 
-    var response = await userSignUp(userSignUpData);
+    var response =  await userSignUp(userSignUpData);
 
     if (response != undefined && response.statusCode == 200) {
         localStorage.setItem('token', response.token)
         window.location.href = "login.html";
     }
-    else {
-
-        const toastLiveExample = document.getElementById('liveToast')
-        document.getElementById('error-message').innerText = `${response.message}`;
-
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-        toastBootstrap.show()
-
-    }
-
-
 }
 
 

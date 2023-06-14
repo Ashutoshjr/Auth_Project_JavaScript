@@ -32,44 +32,53 @@ async function userLogin(userDetails) {
         );
 
     return userResponse;
-
-
 }
 
 
 async function userSignUp(userDetails) {
 
-    var userResponse = {};
+    try {
 
-    await fetch(`${baseUri}register`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userDetails)
-    })
-        .then(response => response.json())
-        .then((res) => {
-    
-            userResponse =res;
-            
+        var userResponse = {};
+
+        await fetch(`${baseUri}register`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userDetails)
         })
-        .catch(error =>
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    response.json().then(error => {
+                        handleError();
+                    })
+                }
+            })
+            .then((res) => {
+                userResponse = res;
+            })
+            .catch(error =>
+                userResponse = error,
+            );
 
-            userResponse.message = error.message,
-            userResponse.token = ''
-        );
-
-    return userResponse;
+        return userResponse;
+    }
+    catch (error) {
+        console.log('Error in User Sign Up : ', error);
+        document.getElementById('errorMessage').textContent = error.message
+    }
 }
 
 
- async function getUserByUserName(username) {
+async function getUserByUserName(username) {
 
     var userResponse = {};
 
-     await fetch(`${baseUri}get-user/${username}`, {
+    await fetch(`${baseUri}get-user/${username}`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -175,5 +184,12 @@ async function sendResetPassword(emailValue) {
     return userResponse;
 }
 
+
+function handleError() {
+    const toastLiveExample = document.getElementById('liveToast');
+    document.getElementById('error-message').innerText = error.errors.Password[0];
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+}
 
 
