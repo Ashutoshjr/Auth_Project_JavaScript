@@ -4,10 +4,10 @@ async function signUp() {
 
     const userSignUpData =
     {
-        firstName: document.getElementById("firstname").value,
-        lastName: document.getElementById("lastname").value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
         email:  document.getElementById("email-field").value,
-        userName: document.getElementById("username").value,
+        userName: document.getElementById("userName").value,
         password: document.getElementById("password").value,
     }
 

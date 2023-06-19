@@ -1,7 +1,6 @@
 
 async function resetPassword()
 {
-
    
    var resetPasswordDetails = {
 

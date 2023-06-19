@@ -34,3 +34,67 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+
+function validateInput(inputId, regex, errorMessage) {
+  var input = document.getElementById(inputId);
+  var errorSpan = document.getElementById(inputId + "-error");
+
+  if (!regex.test(input.value)) {
+    // Display error message
+    errorSpan.textContent = errorMessage;
+    input.classList.add("invalid");
+    return false;
+  }
+
+  // Clear error message
+  errorSpan.textContent = "";
+  input.classList.remove("invalid");
+  return true;
+}
+
+
+
+function validateAndDisplayError(inputId, errorId, validationFunction) {
+  var input = document.getElementById(inputId);
+  var errorSpan = document.getElementById(errorId);
+
+  var validationResult = validationFunction(input.value);
+
+  if (validationResult !== "Valid") {
+    errorSpan.textContent = validationResult;
+    input.classList.add("invalid");
+  } else {
+    errorSpan.textContent = "";
+    input.classList.remove("invalid");
+  }
+}
+
+
+function validatePassword(password) {
+  // Define the password criteria
+  var lengthRegex = /^.{8,}$/; // Minimum length of 8 characters
+  var uppercaseRegex = /[A-Z]/; // At least one uppercase letter
+  var lowercaseRegex = /[a-z]/; // At least one lowercase letter
+  var digitRegex = /\d/; // At least one digit
+  
+
+  // Perform the validation
+  if (!lengthRegex.test(password)) {
+    return "Password must be at least 8 characters long.";
+  }
+
+  if (!uppercaseRegex.test(password)) {
+    return "Password must contain at least one uppercase letter.";
+  }
+
+  if (!lowercaseRegex.test(password)) {
+    return "Password must contain at least one lowercase letter.";
+  }
+
+  if (!digitRegex.test(password)) {
+    return "Password must contain at least one digit.";
+  }
+
+  // Password meets all criteria
+  return "Valid";
+}
